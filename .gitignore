@@ -1,0 +1,19 @@
+# Systeme
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs et temporaires
+*.log
+*.tmp
+.cache/
+
+# Dependances (au cas ou le projet evolue)
+node_modules/

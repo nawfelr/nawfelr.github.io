@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nawfel Rahmani — Data Analyst &amp; Web Developer</title>
+<meta name="description" content="Développeur web devenu data analyst. Carnet de bord d'une reconversion vers le data engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#0E1512; --panel:#151D19; --panel2:#1A231E;
+  --ink:#EDE6D7; --ink2:#98A199; --ink3:#5F6862;
+  --green:#7DB79A; --green-l:#5C8E77; --ochre:#C9A227;
+  --rule:#242D28;
+  --fd:'Fraunces',Georgia,serif;
+  --fb:'Source Serif 4',Georgia,serif;
+  --fm:'IBM Plex Mono',monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+  --maxw:1240px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+ul,ol{list-style:none}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+::selection{background:rgba(201,162,39,.28);color:#0E1512}
+
+/* graph paper */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+ background-image:
+   linear-gradient(rgba(125,183,154,.045) 1px,transparent 1px),
+   linear-gradient(90deg,rgba(125,183,154,.045) 1px,transparent 1px),
+   linear-gradient(rgba(125,183,154,.075) 1px,transparent 1px),
+   linear-gradient(90deg,rgba(125,183,154,.075) 1px,transparent 1px);
+ background-size:26px 26px,26px 26px,130px 130px,130px 130px}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 55% at 50% -5%,rgba(201,162,39,.055) 0%,transparent 70%)}
+.wrap{position:relative;z-index:1}
+
+.skip{position:absolute;left:-9999px;top:0;background:var(--ochre);color:#0E1512;
+  padding:10px 16px;font-family:var(--fm);font-size:12px;z-index:999}
+.skip:focus{left:12px;top:12px}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(14,21,18,.86);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.bar{max-width:var(--maxw);margin:0 auto;padding:14px 40px;display:flex;align-items:baseline;
+  justify-content:space-between;gap:24px}
+.mark{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.mark b{font-weight:500}
+.mark i{font-style:normal;color:var(--ink3)}
+nav ul{display:flex;gap:26px}
+nav a{font-family:var(--fm);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink2);text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;transition:.2s}
+nav a:hover,nav a.on{color:var(--ochre);border-bottom-color:var(--ochre)}
+.lang{display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.lang button{font-family:var(--fm);font-size:10px;letter-spacing:.1em;padding:5px 9px;border:0;
+  background:transparent;color:var(--ink3);cursor:pointer;transition:.18s}
+.lang button.on{background:var(--ochre);color:#0E1512}
+
+/* ---------- shared ---------- */
+main{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+.eyebrow{font-family:var(--fm);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ochre);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+h1,h2,h3{font-family:var(--fd);font-weight:700;letter-spacing:-.022em;line-height:1.08}
+h2{font-size:clamp(26px,3vw,38px);margin-bottom:14px}
+h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.lede{font-size:19px;color:var(--ink2);max-width:56ch;line-height:1.72}
+section{padding:96px 0;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+
+/* ---------- hero ---------- */
+.hero{padding:112px 0 96px;border-top:0}
+.hero h1{font-size:clamp(44px,7.2vw,92px);max-width:15ch;margin-bottom:34px}
+.hero h1 em{font-family:var(--fb);font-style:italic;font-weight:300;letter-spacing:-.01em;color:var(--ochre)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--rule);background:var(--panel);
+  max-width:760px;margin-top:44px}
+.hero-meta div{flex:1 1 190px;padding:16px 20px;border-right:1px solid var(--rule)}
+.hero-meta div:last-child{border-right:0}
+.hero-meta dt{font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:5px}
+.hero-meta dd{font-family:var(--fm);font-size:13px;color:var(--ink)}
+.hero-meta dd.hl{color:var(--ochre);font-weight:500}
+.readout{display:flex;gap:0;border:1px solid var(--rule);border-top:0;background:var(--panel2);
+  max-width:760px}
+.readout div{flex:1 1 0;padding:15px 20px;border-right:1px solid var(--rule)}
+.readout div:last-child{border-right:0}
+.readout b{display:block;font-family:var(--fd);font-size:30px;font-weight:700;color:var(--ochre);
+  line-height:1;margin-bottom:5px;font-variant-numeric:tabular-nums}
+.readout span{font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+.pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ochre);
+  margin-right:7px;vertical-align:1px;animation:p 2.6s ease infinite}
+@keyframes p{0%,100%{box-shadow:0 0 0 0 rgba(201,162,39,.5)}50%{box-shadow:0 0 0 6px rgba(201,162,39,0)}}
+
+/* ---------- scrollytelling ---------- */
+.scrolly{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:64px;align-items:start}
+.steps{padding:30vh 0 46vh}
+.step{min-height:82vh;display:flex;flex-direction:column;justify-content:center;
+  opacity:.32;transition:opacity .5s var(--e)}
+.step.on{opacity:1}
+/* la première étape tient plus longtemps : le temps de lire le tracé */
+.step:first-child{min-height:108vh}
+.step:last-child{min-height:76vh}
+.step-n{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;color:var(--ochre);margin-bottom:12px}
+.step h3{margin-bottom:12px}
+.step p{color:var(--ink2);max-width:46ch}
+.step .yr{font-family:var(--fm);font-size:11px;color:var(--ink3);letter-spacing:.1em;margin-bottom:6px}
+
+.figwrap{position:sticky;top:120px;height:min(74vh,620px);display:flex;flex-direction:column}
+.fig{position:relative;flex:1;border:1px solid var(--rule);background:var(--panel);overflow:hidden}
+.fig::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(125,183,154,.055) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(125,183,154,.055) 1px,transparent 1px);background-size:22px 22px}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.st{opacity:0;transition:opacity .55s var(--e)}
+.st.on{opacity:1}
+.figcap{border:1px solid var(--rule);border-top:0;background:var(--panel2);padding:11px 16px;
+  display:flex;justify-content:space-between;gap:14px;align-items:center}
+.figcap span{font-family:var(--fm);font-size:10.5px;letter-spacing:.06em;color:var(--ink2)}
+.figcap b{font-family:var(--fm);font-size:10.5px;font-weight:500;color:var(--ochre);letter-spacing:.1em;
+  white-space:nowrap}
+/* svg primitives */
+.n-box{fill:var(--paper);stroke:var(--green);stroke-width:1.4}
+.n-box-o{fill:none;stroke:var(--ochre);stroke-width:1.4}
+.n-fill{fill:rgba(125,183,154,.13)}
+.n-line{stroke:var(--green);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.n-line-d{stroke:var(--green-l);stroke-width:1.2;fill:none;stroke-dasharray:4 5}
+.n-line-o{stroke:var(--ochre);stroke-width:1.4;fill:none;stroke-linecap:round}
+.n-t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;fill:var(--ink2);letter-spacing:.06em}
+.n-t-s{font-family:'IBM Plex Mono',monospace;font-size:8px;fill:var(--ink3);letter-spacing:.08em}
+.n-t-o{font-family:'IBM Plex Mono',monospace;font-size:8.5px;fill:var(--ochre);letter-spacing:.08em}
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.st.on .draw{animation:draw 1.35s var(--e) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- skills ---------- */
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:64px;align-items:start}
+table.sk{width:100%;border-collapse:collapse;font-family:var(--fm);font-size:12.5px}
+table.sk caption{text-align:left;font-family:var(--fm);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink3);padding-bottom:10px}
+table.sk th{text-align:left;font-weight:500;color:var(--ink3);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;padding:0 0 9px;border-bottom:1px solid var(--rule)}
+table.sk th:last-child,table.sk td:last-child{text-align:right}
+table.sk td{padding:9px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+table.sk tr:last-child td{border-bottom:0}
+.dots{display:inline-flex;gap:3px}
+.dots i{width:7px;height:7px;border-radius:50%;border:1px solid var(--green);display:inline-block}
+.dots i.f{background:var(--green)}
+.sk-note{font-family:var(--fm);font-size:11px;color:var(--ink3)}
+
+/* ---------- projects ---------- */
+.proj{border-top:1px solid var(--rule);padding:34px 0}
+.proj:first-of-type{border-top:1px solid var(--ink);padding-top:26px}
+.proj-head{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:26px;align-items:baseline}
+.proj-idx{font-family:var(--fm);font-size:11px;color:var(--ochre);letter-spacing:.1em}
+.proj-tags{font-family:var(--fm);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);
+  white-space:nowrap}
+.proj-sum{color:var(--ink2);max-width:60ch;margin-top:10px;font-size:16px}
+details.case{margin-top:16px}
+details.case>summary{list-style:none;cursor:pointer;font-family:var(--fm);font-size:10.5px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--green);display:inline-flex;align-items:center;gap:8px;
+  padding:6px 0;border-bottom:1px solid transparent;transition:.2s}
+details.case>summary::-webkit-details-marker{display:none}
+details.case>summary:hover{border-bottom-color:var(--green)}
+details.case>summary::before{content:"+";font-size:13px;line-height:1}
+details.case[open]>summary::before{content:"−"}
+.case-body{margin-top:20px;padding-left:102px;display:grid;gap:0;max-width:960px}
+.case-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:22px;padding:13px 0;
+  border-top:1px solid var(--rule)}
+.case-row dt{font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre)}
+.case-row dd{color:var(--ink2);font-size:15.5px;max-width:62ch}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-left:102px}
+.stack span{font-family:var(--fm);font-size:10px;letter-spacing:.05em;padding:3px 9px;
+  border:1px solid var(--rule);background:var(--panel);color:var(--ink2)}
+.links{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;padding-left:102px}
+.links span,.links a{font-family:var(--fm);font-size:10.5px;letter-spacing:.07em;color:var(--ink3);text-decoration:none}
+.links span::before,.links a::before{content:"↗ ";opacity:.6}
+.links a{cursor:pointer}
+.links a:hover{color:var(--ink);text-decoration:underline}
+
+/* ---------- education ---------- */
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0;border:1px solid var(--rule)}
+.edu article{padding:24px;border-right:1px solid var(--rule);background:var(--panel)}
+.edu article:last-child{border-right:0}
+.edu article.soon{background:transparent}
+.edu .y{font-family:var(--fm);font-size:10px;letter-spacing:.13em;color:var(--ochre);margin-bottom:11px}
+.edu h3{font-size:16.5px;margin-bottom:5px}
+.edu p{font-family:var(--fm);font-size:11px;color:var(--ink3);margin-bottom:14px}
+.badge{font-family:var(--fm);font-size:9px;letter-spacing:.11em;text-transform:uppercase;
+  padding:3px 9px;border:1px solid var(--ochre);color:var(--ochre);display:inline-block;background:rgba(201,162,39,.07)}
+.badge.wait{border-color:var(--rule);color:var(--ink3)}
+
+/* ---------- off ---------- */
+.off{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:36px}
+.off article{background:var(--paper);padding:22px}
+.off h3{font-size:15px;margin-bottom:8px}
+.off p{font-size:14.5px;color:var(--ink2);line-height:1.65}
+.off .ret{margin-top:11px;font-family:var(--fm);font-size:10.5px;color:var(--green);line-height:1.6}
+.off article{transition:background .25s}
+.off article:hover{background:var(--panel)}
+.off .ret b{color:var(--ochre);font-weight:500}
+
+/* ---------- contact ---------- */
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.cl{border-top:1px solid var(--ink)}
+.cl a,.cl span{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  padding:15px 0;border-bottom:1px solid var(--rule);text-decoration:none;transition:.2s}
+.cl a:hover{padding-left:9px;color:var(--ochre)}
+.cl b{font-family:var(--fd);font-weight:600;font-size:16px}
+.cl em{font-family:var(--fm);font-style:normal;font-size:10.5px;color:var(--ink3);letter-spacing:.08em}
+.cl span{color:var(--ink3)}
+.avail{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.avail span{font-family:var(--fm);font-size:10.5px;letter-spacing:.06em;padding:5px 11px;
+  border:1px solid var(--rule);background:var(--panel)}
+.avail span.hl{border-color:var(--ochre);color:var(--ochre)}
+
+footer{border-top:1px solid var(--rule);padding:22px 0 34px;display:flex;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;font-family:var(--fm);font-size:10.5px;color:var(--ink3);letter-spacing:.06em}
+
+/* ---------- responsive ---------- */
+@media(max-width:1000px){
+  .scrolly,.grid2,.contact{grid-template-columns:1fr;gap:34px}
+  .figwrap{display:none}
+  .steps{padding:0}
+  .step,.step:first-child,.step:last-child{min-height:0}
+  .step{opacity:1;padding:22px 0;border-top:1px solid var(--rule)}
+  .case-body,.stack,.links{padding-left:0}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .bar{padding:12px 18px;flex-wrap:wrap;gap:12px}
+  nav ul{gap:16px}
+  main{padding:0 18px}
+  section{padding:64px 0}
+  .hero{padding:64px 0}
+  .hero-meta div{flex:1 1 100%;border-right:0;border-bottom:1px solid var(--rule)}
+  .hero-meta div:last-child{border-bottom:0}
+  .proj-head{grid-template-columns:1fr;gap:6px}
+  .case-row{grid-template-columns:1fr;gap:5px}
+  .edu article{border-right:0;border-bottom:1px solid var(--rule)}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .step{opacity:1}
+}
+
+/* ---------- print : le site devient un CV ---------- */
+@media print{
+  body{background:#fff;color:#000;font-size:10.5pt}
+  body::before,body::after,header,.figwrap,.lang,.skip,footer,details.case>summary,.readout{display:none!important}
+  .hero-meta,.edu article,.off article,.avail span,.stack span,table.sk td,.panel{background:#fff!important;color:#000!important}
+  h1,h2,h3,b,dt,dd,p,td,th,span,em{color:#000!important}
+  .eyebrow,.proj-idx,.case-row dt,.y{color:#555!important}
+  .badge{border-color:#555!important;color:#000!important;background:#fff!important}
+  .dots i{border-color:#000!important}
+  .dots i.f{background:#000!important}
+  main{max-width:none;padding:0}
+  section{padding:14pt 0;border-top:1pt solid #999;break-inside:avoid}
+  .hero{padding:0 0 12pt}
+  .hero h1{font-size:26pt;max-width:none}
+  .lede{font-size:11pt}
+  .step,.step:first-child,.step:last-child{min-height:0!important}
+  .step{opacity:1!important;padding:5pt 0}
+  .steps{padding:0!important}
+  .scrolly,.grid2,.contact{display:block}
+  details.case{display:block}
+  details.case .case-body{display:block!important}
+  .case-body,.stack,.links{padding-left:0}
+  a{text-decoration:none;color:#000}
+  .off,.edu{border-color:#999}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-fr="Aller au contenu" data-en="Skip to content">Aller au contenu</a>
+<div class="wrap">
+
+<header>
+  <div class="bar">
+    <div class="mark"><b>Nawfel Rahmani</b> <i>— Data Analyst</i></div>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#traj" data-fr="Trajectoire" data-en="Path">Trajectoire</a></li>
+        <li><a href="#comp" data-fr="Compétences" data-en="Skills">Compétences</a></li>
+        <li><a href="#proj" data-fr="Projets" data-en="Projects">Projets</a></li>
+        <li><a href="#form" data-fr="Diplômes" data-en="Degrees">Diplômes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="lang">
+      <button class="on" id="bfr" onclick="setLang('fr')">FR</button>
+      <button id="ben" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <p class="eyebrow"><span data-fr="-- carnet de bord" data-en="-- field notebook">-- carnet de bord</span></p>
+  <h1><span data-fr="J'ai appris à lire des constantes vitales avant d'apprendre à lire <em>des données.</em>" data-en="I learned to read vital signs before I learned to read <em>data.</em>">J'ai appris à lire des constantes vitales avant d'apprendre à lire <em>des données.</em></span></h1>
+  <p class="lede" data-fr="Nawfel Rahmani, 26 ans. Développeur web diplômé, data analyst diplômé, en route vers le data engineering. Ce site est le relevé de cette trajectoire — d'où elle part, où elle en est, et où elle va." data-en="Nawfel Rahmani, 26. Certified web developer, certified data analyst, heading toward data engineering. This site is the record of that path — where it started, where it stands, and where it goes.">Nawfel Rahmani, 26 ans. Développeur web diplômé, data analyst diplômé, en route vers le data engineering. Ce site est le relevé de cette trajectoire — d'où elle part, où elle en est, et où elle va.</p>
+
+  <dl class="hero-meta">
+    <div><dt data-fr="Statut" data-en="Status">Statut</dt><dd class="hl"><span class="pulse"></span><span data-fr="Disponible" data-en="Available">Disponible</span></dd></div>
+    <div><dt data-fr="Recherche" data-en="Looking for">Recherche</dt><dd data-fr="CDI · CDD · Alternance" data-en="Permanent · Contract · Apprenticeship">CDI · CDD · Alternance</dd></div>
+    <div><dt data-fr="Base" data-en="Based in">Base</dt><dd>Poissy · Île-de-France</dd></div>
+    <div><dt data-fr="Mobilité" data-en="Mobility">Mobilité</dt><dd data-fr="France entière · Remote" data-en="Anywhere in France · Remote">France entière · Remote</dd></div>
+  </dl>
+  <div class="readout">
+    <div><b data-count="2">0</b><span data-fr="Ans d'expérience" data-en="Years experience">Ans d'expérience</span></div>
+    <div><b data-count="12">0</b><span data-fr="Technologies" data-en="Technologies">Technologies</span></div>
+    <div><b data-count="2">0</b><span data-fr="Titres obtenus" data-en="Certifications earned">Titres obtenus</span></div>
+    <div><b data-count="3">0</b><span data-fr="Projets livrés" data-en="Projects shipped">Projets livrés</span></div>
+  </div>
+</section>
+
+<section id="traj">
+  <p class="eyebrow"><span data-fr="-- 01 · trajectoire" data-en="-- 01 · path">-- 01 · trajectoire</span></p>
+  <h2 data-fr="Un seul schéma, cinq états" data-en="One diagram, five states">Un seul schéma, cinq états</h2>
+  <p class="lede" style="margin-bottom:8px" data-fr="Le dessin à droite évolue à mesure que vous descendez. C'est le même système, redessiné à chaque étape de mon parcours." data-en="The diagram on the right evolves as you scroll. It's the same system, redrawn at each stage of my path.">Le dessin à droite évolue à mesure que vous descendez. C'est le même système, redessiné à chaque étape de mon parcours.</p>
+
+  <div class="scrolly">
+    <div class="steps">
+      <article class="step on" data-i="0">
+        <p class="yr">2019 — 2022</p>
+        <p class="step-n" data-fr="État 1 · Lire un signal" data-en="State 1 · Reading a signal">État 1 · Lire un signal</p>
+        <h3 data-fr="Institut de formation en soins infirmiers" data-en="Nursing school">Institut de formation en soins infirmiers</h3>
+        <p data-fr="Trois ans à surveiller des courbes : tension, saturation, fréquence. Mon premier vrai métier consistait déjà à repérer l'anomalie dans une série de mesures, et à décider quoi en faire. Je ne le formulais pas comme ça à l'époque." data-en="Three years watching curves: blood pressure, saturation, heart rate. My first real job was already about spotting the anomaly in a series of measurements and deciding what to do about it. I didn't phrase it that way back then.">Trois ans à surveiller des courbes : tension, saturation, fréquence. Mon premier vrai métier consistait déjà à repérer l'anomalie dans une série de mesures, et à décider quoi en faire.</p>
+      </article>
+
+      <article class="step" data-i="1">
+        <p class="yr">2022 — 2024</p>
+        <p class="step-n" data-fr="État 2 · Construire l'interface" data-en="State 2 · Building the interface">État 2 · Construire l'interface</p>
+        <h3 data-fr="Développeur web & web mobile" data-en="Web & mobile web developer">Développeur web & web mobile</h3>
+        <p data-fr="Retour à la passion d'enfance, cette fois avec un diplôme au bout : titre professionnel obtenu en 2024, puis un an en poste. PHP, JavaScript, MySQL. J'apprends à relier une interface à une base de données — sans savoir que je décris déjà un pipeline." data-en="Back to a childhood passion, this time with a certification at the end: professional title obtained in 2024, then a year on the job. PHP, JavaScript, MySQL. I learn to connect an interface to a database — without realising I'm already describing a pipeline.">Retour à la passion d'enfance, cette fois avec un diplôme au bout : titre professionnel obtenu en 2024, puis un an en poste. J'apprends à relier une interface à une base de données — sans savoir que je décris déjà un pipeline.</p>
+      </article>
+
+      <article class="step" data-i="2">
+        <p class="yr">2026</p>
+        <p class="step-n" data-fr="État 3 · Transformer la donnée" data-en="State 3 · Transforming data">État 3 · Transformer la donnée</p>
+        <h3 data-fr="Data analyst" data-en="Data analyst">Data analyst</h3>
+        <p data-fr="Diplôme obtenu. Python, Pandas, SQL, BigQuery, Power BI. Le schéma se retourne : l'interface n'est plus le but, elle devient la sortie. Ce qui compte, c'est ce qui se passe entre la source et le graphique." data-en="Certification obtained. Python, Pandas, SQL, BigQuery, Power BI. The diagram flips: the interface is no longer the goal, it becomes the output. What matters is what happens between the source and the chart.">Diplôme obtenu. Python, Pandas, SQL, BigQuery, Power BI. Le schéma se retourne : l'interface n'est plus le but, elle devient la sortie. Ce qui compte, c'est ce qui se passe entre la source et le graphique.</p>
+      </article>
+
+      <article class="step" data-i="3">
+        <p class="yr">2027 →</p>
+        <p class="step-n" data-fr="État 4 · Orchestrer" data-en="State 4 · Orchestrating">État 4 · Orchestrer</p>
+        <h3 data-fr="Data engineer" data-en="Data engineer">Data engineer</h3>
+        <p data-fr="L'objectif. Plusieurs sources, une orchestration, un entrepôt, des sorties multiples. Ce n'est plus une analyse mais un système qui tourne sans moi. Airflow, Spark, cloud, Dataiku — la liste de ce que j'ai à apprendre est déjà écrite." data-en="The goal. Multiple sources, orchestration, a warehouse, multiple outputs. No longer an analysis but a system that runs without me. Airflow, Spark, cloud, Dataiku — the list of what I need to learn is already written.">L'objectif. Plusieurs sources, une orchestration, un entrepôt, des sorties multiples. Ce n'est plus une analyse mais un système qui tourne sans moi.</p>
+      </article>
+
+      <article class="step" data-i="4">
+        <p class="yr">2028 →</p>
+        <p class="step-n" data-fr="État 5 · Sécuriser" data-en="State 5 · Securing">État 5 · Sécuriser</p>
+        <h3>DataSecOps</h3>
+        <p data-fr="Le même système, mais avec une frontière. Chiffrement, gestion des accès, conformité, maîtrise des coûts. C'est là que je veux finir : à l'endroit où la donnée circule vite et où personne ne peut la lire par accident." data-en="The same system, but with a boundary. Encryption, access control, compliance, cost control. That's where I want to end up: where data moves fast and nobody can read it by accident.">Le même système, mais avec une frontière. Chiffrement, gestion des accès, conformité, maîtrise des coûts. C'est là que je veux finir : à l'endroit où la donnée circule vite et où personne ne peut la lire par accident.</p>
+      </article>
+    </div>
+
+    <div class="figwrap" aria-hidden="true">
+      <div class="fig">
+        <svg viewBox="0 0 520 560" xmlns="http://www.w3.org/2000/svg">
+
+          <g class="st on" data-i="0">
+            <text class="n-t-o" x="30" y="42">FIG. 1 — MONITORING</text>
+            <rect class="n-box" x="30" y="70" width="460" height="200" rx="3"/>
+            <path class="n-line-d" d="M30 170h460"/>
+            <path class="n-line draw" style="--len:900"
+              d="M40 190 L80 190 L92 150 L104 214 L118 120 L132 196 L150 190 L200 190 L214 152 L226 212 L240 118 L254 194 L272 190 L330 190 L344 150 L356 216 L370 120 L384 196 L400 190 L480 190"/>
+            <text class="n-t" x="30" y="292">bpm · SpO₂ · TA</text>
+            <text class="n-t-s" x="30" y="310">une série temporelle · un seuil · une décision</text>
+            <rect class="n-box-o" x="330" y="340" width="160" height="66" rx="3"/>
+            <text class="n-t-o" x="346" y="368">ANOMALIE</text>
+            <text class="n-t-s" x="346" y="386">détectée → action</text>
+            <path class="n-line-o draw" style="--len:200" d="M370 120 L370 300 L410 300 L410 340"/>
+            <circle cx="370" cy="120" r="4.5" fill="var(--ochre)"/>
+          </g>
+
+          <g class="st" data-i="1">
+            <text class="n-t-o" x="30" y="42">FIG. 2 — APPLICATION WEB</text>
+            <rect class="n-box" x="30" y="70" width="250" height="170" rx="3"/>
+            <path class="n-line" d="M30 96h250"/>
+            <circle cx="46" cy="83" r="3.5" fill="var(--green)" opacity=".5"/>
+            <circle cx="58" cy="83" r="3.5" fill="var(--green)" opacity=".5"/>
+            <rect class="n-fill" x="46" y="112" width="218" height="26" rx="2"/>
+            <rect class="n-fill" x="46" y="148" width="140" height="12" rx="2"/>
+            <rect class="n-fill" x="46" y="168" width="180" height="12" rx="2"/>
+            <rect class="n-fill" x="46" y="188" width="110" height="12" rx="2"/>
+            <rect class="n-box-o" x="46" y="210" width="76" height="18" rx="2"/>
+            <text class="n-t-s" x="30" y="262">interface · PHP · JS</text>
+
+            <path class="n-line draw" style="--len:200" d="M290 155 L370 155"/>
+            <path class="n-line" d="M362 149 l8 6 -8 6"/>
+            <g transform="translate(380,110)">
+              <ellipse class="n-box" cx="55" cy="14" rx="55" ry="14"/>
+              <path class="n-box" d="M0 14v62a55 14 0 0 0 110 0V14" fill="var(--paper)"/>
+              <ellipse class="n-fill" cx="55" cy="14" rx="55" ry="14"/>
+              <path class="n-line" d="M0 44a55 14 0 0 0 110 0"/>
+            </g>
+            <text class="n-t-s" x="380" y="222">MySQL</text>
+            <text class="n-t" x="30" y="330">requête → réponse</text>
+            <text class="n-t-s" x="30" y="348">un flux à sens unique, déclenché par un clic</text>
+          </g>
+
+          <g class="st" data-i="2">
+            <text class="n-t-o" x="30" y="42">FIG. 3 — ANALYSE</text>
+            <g transform="translate(30,80)">
+              <ellipse class="n-box" cx="42" cy="11" rx="42" ry="11"/>
+              <path class="n-box" d="M0 11v46a42 11 0 0 0 84 0V11" fill="var(--paper)"/>
+              <ellipse class="n-fill" cx="42" cy="11" rx="42" ry="11"/>
+            </g>
+            <text class="n-t-s" x="30" y="166">source</text>
+            <path class="n-line draw" style="--len:120" d="M120 112 L186 112"/>
+            <path class="n-line" d="M178 106 l8 6 -8 6"/>
+            <rect class="n-box" x="190" y="82" width="124" height="60" rx="3"/>
+            <rect class="n-fill" x="190" y="82" width="124" height="60" rx="3"/>
+            <text class="n-t" x="206" y="108">clean · join</text>
+            <text class="n-t" x="206" y="126">aggregate</text>
+            <path class="n-line draw" style="--len:120" d="M322 112 L388 112"/>
+            <path class="n-line" d="M380 106 l8 6 -8 6"/>
+            <rect class="n-box" x="392" y="74" width="98" height="76" rx="3"/>
+            <path class="n-line" d="M404 140 v-22 M420 140 v-38 M436 140 v-14 M452 140 v-48 M468 140 v-30"/>
+            <text class="n-t-s" x="392" y="166">rapport</text>
+            <text class="n-t" x="30" y="240">source → transformation → décision</text>
+            <text class="n-t-s" x="30" y="258">Python · Pandas · SQL · BigQuery · Power BI</text>
+            <path class="n-line-o draw" style="--len:300" d="M252 150 L252 200 L60 200 L60 152"/>
+            <text class="n-t-o" x="120" y="216">itération</text>
+          </g>
+
+          <g class="st" data-i="3">
+            <text class="n-t-o" x="30" y="42">FIG. 4 — PIPELINE ORCHESTRÉ</text>
+            <g transform="translate(24,72)"><ellipse class="n-box" cx="30" cy="9" rx="30" ry="9"/><path class="n-box" d="M0 9v30a30 9 0 0 0 60 0V9" fill="var(--paper)"/><ellipse class="n-fill" cx="30" cy="9" rx="30" ry="9"/></g>
+            <g transform="translate(24,142)"><ellipse class="n-box" cx="30" cy="9" rx="30" ry="9"/><path class="n-box" d="M0 9v30a30 9 0 0 0 60 0V9" fill="var(--paper)"/><ellipse class="n-fill" cx="30" cy="9" rx="30" ry="9"/></g>
+            <g transform="translate(24,212)"><ellipse class="n-box" cx="30" cy="9" rx="30" ry="9"/><path class="n-box" d="M0 9v30a30 9 0 0 0 60 0V9" fill="var(--paper)"/><ellipse class="n-fill" cx="30" cy="9" rx="30" ry="9"/></g>
+            <text class="n-t-s" x="24" y="278">sources</text>
+            <path class="n-line draw" style="--len:420" d="M92 96 L150 96 L150 166 M92 166 L150 166 M92 236 L150 236 L150 166 M150 166 L188 166"/>
+            <path class="n-line" d="M180 160 l8 6 -8 6"/>
+            <rect class="n-box" x="192" y="128" width="120" height="76" rx="3"/>
+            <rect class="n-fill" x="192" y="128" width="120" height="76" rx="3"/>
+            <text class="n-t" x="206" y="154">orchestrateur</text>
+            <text class="n-t-s" x="206" y="172">DAG · retry</text>
+            <text class="n-t-s" x="206" y="188">schedule</text>
+            <path class="n-line draw" style="--len:120" d="M320 166 L376 166"/>
+            <path class="n-line" d="M368 160 l8 6 -8 6"/>
+            <g transform="translate(382,128)"><ellipse class="n-box" cx="54" cy="13" rx="54" ry="13"/><path class="n-box" d="M0 13v50a54 13 0 0 0 108 0V13" fill="var(--paper)"/><ellipse class="n-fill" cx="54" cy="13" rx="54" ry="13"/></g>
+            <text class="n-t-s" x="382" y="220">entrepôt</text>
+            <path class="n-line-d" d="M436 204 L436 250 L150 250 L150 300"/>
+            <rect class="n-box-o" x="80" y="300" width="146" height="46" rx="3"/>
+            <text class="n-t-o" x="94" y="328">dashboards</text>
+            <rect class="n-box-o" x="250" y="300" width="146" height="46" rx="3"/>
+            <text class="n-t-o" x="264" y="328">API · exports</text>
+            <path class="n-line-d" d="M436 204 L436 274 L323 274 L323 300"/>
+            <text class="n-t" x="30" y="392">un système qui tourne sans moi</text>
+          </g>
+
+          <g class="st" data-i="4">
+            <text class="n-t-o" x="30" y="42">FIG. 5 — PIPELINE SÉCURISÉ</text>
+            <rect x="16" y="58" width="488" height="316" rx="4" fill="none" stroke="var(--ochre)" stroke-width="1.4" stroke-dasharray="7 6"/>
+            <text class="n-t-o" x="30" y="80">PÉRIMÈTRE · CHIFFREMENT · IAM</text>
+            <g transform="translate(34,104)"><ellipse class="n-box" cx="28" cy="9" rx="28" ry="9"/><path class="n-box" d="M0 9v28a28 9 0 0 0 56 0V9" fill="var(--paper)"/><ellipse class="n-fill" cx="28" cy="9" rx="28" ry="9"/></g>
+            <g transform="translate(34,180)"><ellipse class="n-box" cx="28" cy="9" rx="28" ry="9"/><path class="n-box" d="M0 9v28a28 9 0 0 0 56 0V9" fill="var(--paper)"/><ellipse class="n-fill" cx="28" cy="9" rx="28" ry="9"/></g>
+            <path class="n-line draw" style="--len:300" d="M98 126 L142 126 L142 174 M98 204 L142 204 L142 174 M142 174 L184 174"/>
+            <path class="n-line" d="M176 168 l8 6 -8 6"/>
+            <rect class="n-box" x="188" y="140" width="112" height="68" rx="3"/>
+            <rect class="n-fill" x="188" y="140" width="112" height="68" rx="3"/>
+            <text class="n-t" x="202" y="168">pipeline</text>
+            <text class="n-t-s" x="202" y="186">audit · lineage</text>
+            <path class="n-line draw" style="--len:100" d="M308 174 L354 174"/>
+            <path class="n-line" d="M346 168 l8 6 -8 6"/>
+            <g transform="translate(360,140)"><ellipse class="n-box" cx="48" cy="12" rx="48" ry="12"/><path class="n-box" d="M0 12v44a48 12 0 0 0 96 0V12" fill="var(--paper)"/><ellipse class="n-fill" cx="48" cy="12" rx="48" ry="12"/></g>
+            <g transform="translate(232,238)">
+              <rect class="n-box-o" x="0" y="14" width="46" height="34" rx="3"/>
+              <path class="n-line-o" d="M10 14v-8a13 13 0 0 1 26 0v8"/>
+              <circle cx="23" cy="31" r="3.5" fill="var(--ochre)"/>
+            </g>
+            <text class="n-t-o" x="200" y="308">contrôle d'accès</text>
+            <text class="n-t" x="30" y="418">la donnée circule vite,</text>
+            <text class="n-t" x="30" y="436">et personne ne la lit par accident</text>
+          </g>
+        </svg>
+      </div>
+      <div class="figcap">
+        <span id="capTxt">Fig. 1 — Monitoring</span>
+        <b id="capIdx">01 / 05</b>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="comp">
+  <p class="eyebrow"><span data-fr="-- 02 · compétences" data-en="-- 02 · skills">-- 02 · compétences</span></p>
+  <div class="grid2">
+    <div>
+      <h2 data-fr="Ce que je sais faire, sans arrondir" data-en="What I can do, without rounding up">Ce que je sais faire, sans arrondir</h2>
+      <p class="lede" data-fr="Trois niveaux seulement : je m'en sers en autonomie, je m'en sers avec de la documentation, je l'apprends. Pas de barres de progression à 90 % — elles ne veulent rien dire et tout le monde le sait." data-en="Three levels only: I use it independently, I use it with documentation, I'm learning it. No 90% progress bars — they mean nothing and everyone knows it.">Trois niveaux seulement : je m'en sers en autonomie, je m'en sers avec de la documentation, je l'apprends. Pas de barres de progression à 90 % — elles ne veulent rien dire et tout le monde le sait.</p>
+    </div>
+    <div>
+      <table class="sk">
+        <caption data-fr="Relevé au 24 août 2026" data-en="As of 24 August 2026">Relevé au 24 août 2026</caption>
+        <thead><tr>
+          <th data-fr="Outil" data-en="Tool">Outil</th>
+          <th data-fr="Usage" data-en="Use">Usage</th>
+          <th data-fr="Niveau" data-en="Level">Niveau</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>SQL</td><td class="sk-note" data-fr="quotidien" data-en="daily">quotidien</td><td><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i></span></td></tr>
+          <tr><td>Python</td><td class="sk-note" data-fr="quotidien" data-en="daily">quotidien</td><td><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i></span></td></tr>
+          <tr><td>Pandas</td><td class="sk-note" data-fr="quotidien" data-en="daily">quotidien</td><td><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i></span></td></tr>
+          <tr><td>HTML / CSS</td><td class="sk-note" data-fr="régulier" data-en="regular">régulier</td><td><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i></span></td></tr>
+          <tr><td>PHP</td><td class="sk-note" data-fr="projet diplômant" data-en="diploma project">projet diplômant</td><td><span class="dots"><i class="f"></i><i class="f"></i><i></i></span></td></tr>
+          <tr><td>JavaScript</td><td class="sk-note" data-fr="régulier" data-en="regular">régulier</td><td><span class="dots"><i class="f"></i><i class="f"></i><i></i></span></td></tr>
+          <tr><td>Power BI</td><td class="sk-note" data-fr="certification en cours" data-en="certification in progress">certification en cours</td><td><span class="dots"><i class="f"></i><i class="f"></i><i></i></span></td></tr>
+          <tr><td>BigQuery</td><td class="sk-note" data-fr="projets" data-en="projects">projets</td><td><span class="dots"><i class="f"></i><i class="f"></i><i></i></span></td></tr>
+          <tr><td>Excel</td><td class="sk-note" data-fr="régulier" data-en="regular">régulier</td><td><span class="dots"><i class="f"></i><i class="f"></i><i></i></span></td></tr>
+          <tr><td>Git</td><td class="sk-note" data-fr="régulier" data-en="regular">régulier</td><td><span class="dots"><i class="f"></i><i class="f"></i><i></i></span></td></tr>
+          <tr><td>Dataiku</td><td class="sk-note" data-fr="à apprendre" data-en="to learn">à apprendre</td><td><span class="dots"><i class="f"></i><i></i><i></i></span></td></tr>
+          <tr><td>Airflow · Spark · Cloud</td><td class="sk-note" data-fr="à apprendre" data-en="to learn">à apprendre</td><td><span class="dots"><i class="f"></i><i></i><i></i></span></td></tr>
+        </tbody>
+      </table>
+      <p class="sk-note" style="margin-top:14px">
+        <span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i></span>
+        <span data-fr=" autonome &nbsp;·&nbsp; " data-en=" independent &nbsp;·&nbsp; "> autonome &nbsp;·&nbsp; </span>
+        <span class="dots"><i class="f"></i><i class="f"></i><i></i></span>
+        <span data-fr=" avec doc &nbsp;·&nbsp; " data-en=" with docs &nbsp;·&nbsp; "> avec doc &nbsp;·&nbsp; </span>
+        <span class="dots"><i class="f"></i><i></i><i></i></span>
+        <span data-fr=" en apprentissage" data-en=" learning"> en apprentissage</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="proj">
+  <p class="eyebrow"><span data-fr="-- 03 · projets" data-en="-- 03 · projects">-- 03 · projets</span></p>
+  <h2 data-fr="Trois projets, dépliés" data-en="Three projects, unfolded">Trois projets, dépliés</h2>
+  <p class="lede" style="margin-bottom:44px" data-fr="Une carte avec trois lignes de description ne dit rien de la façon dont on travaille. Chaque projet est donc présenté comme un dossier : le problème, les données, l'approche, ce qui en est sorti." data-en="A card with three lines of description says nothing about how someone works. So each project is presented as a case file: the problem, the data, the approach, the outcome.">Une carte avec trois lignes de description ne dit rien de la façon dont on travaille. Chaque projet est donc présenté comme un dossier : le problème, les données, l'approche, ce qui en est sorti.</p>
+
+  <article class="proj">
+    <div class="proj-head">
+      <span class="proj-idx">P—01</span>
+      <div>
+        <h3 data-fr="Le marché du véhicule électrique en France" data-en="The French electric vehicle market">Le marché du véhicule électrique en France</h3>
+        <p class="proj-sum" data-fr="Comprendre pourquoi l'adoption du véhicule électrique progresse deux fois plus vite dans certaines régions que dans d'autres." data-en="Understanding why electric vehicle adoption grows twice as fast in some regions than others.">Comprendre pourquoi l'adoption du véhicule électrique progresse deux fois plus vite dans certaines régions que dans d'autres.</p>
+      </div>
+      <span class="proj-tags" data-fr="Data · Le Wagon · 2026" data-en="Data · Le Wagon · 2026">Data · Le Wagon · 2026</span>
+    </div>
+    <details class="case">
+      <summary data-fr="Ouvrir le dossier" data-en="Open the case file">Ouvrir le dossier</summary>
+      <dl class="case-body">
+        <div class="case-row"><dt data-fr="Problème" data-en="Problem">Problème</dt><dd data-fr="Le débat public traite le véhicule électrique comme un marché unique, alors que les chiffres d'immatriculation montrent des écarts régionaux importants. L'objectif était d'isoler ce qui explique ces écarts." data-en="Public debate treats the EV market as a single one, while registration figures show significant regional gaps. The goal was to isolate what explains them.">Le débat public traite le véhicule électrique comme un marché unique, alors que les chiffres d'immatriculation montrent des écarts régionaux importants.</dd></div>
+        <div class="case-row"><dt data-fr="Données" data-en="Data">Données</dt><dd data-fr="Immatriculations publiques par région et par modèle, croisées avec des indicateurs socio-économiques et le maillage des bornes de recharge." data-en="Public registration data by region and model, cross-referenced with socio-economic indicators and charging station coverage.">Immatriculations publiques par région et par modèle, croisées avec des indicateurs socio-économiques et le maillage des bornes de recharge.</dd></div>
+        <div class="case-row"><dt data-fr="Approche" data-en="Approach">Approche</dt><dd data-fr="Nettoyage et normalisation sous Pandas, jointures et agrégations en SQL sur BigQuery, puis restitution visuelle. Le plus long a été de réconcilier des découpages géographiques incohérents entre les sources." data-en="Cleaning and normalisation in Pandas, joins and aggregations in SQL on BigQuery, then visual reporting. The longest part was reconciling inconsistent geographic boundaries across sources.">Nettoyage et normalisation sous Pandas, jointures et agrégations en SQL sur BigQuery. Le plus long a été de réconcilier des découpages géographiques incohérents entre les sources.</dd></div>
+        <div class="case-row"><dt data-fr="Résultat" data-en="Outcome">Résultat</dt><dd data-fr="Une lecture régionale du marché et une projection à horizon 2030. Surtout : la confirmation que la densité de bornes explique davantage l'adoption que le revenu médian." data-en="A regional reading of the market and a 2030 projection. Above all: confirmation that charging density explains adoption better than median income.">Une lecture régionale du marché et une projection à horizon 2030. Surtout : la confirmation que la densité de bornes explique davantage l'adoption que le revenu médian.</dd></div>
+      </dl>
+      <div class="stack"><span>Python</span><span>Pandas</span><span>SQL</span><span>BigQuery</span><span>Tableau</span></div>
+      <div class="links"><span data-fr="Dépôt GitHub — à publier" data-en="GitHub repo — to publish">Dépôt GitHub — à publier</span></div>
+    </details>
+  </article>
+
+  <article class="proj">
+    <div class="proj-head">
+      <span class="proj-idx">P—02</span>
+      <div>
+        <h3 data-fr="Anatomie du marché Steam" data-en="Anatomy of the Steam market">Anatomie du marché Steam</h3>
+        <p class="proj-sum" data-fr="Analyser un catalogue de plusieurs milliers de jeux, et restituer l'analyse entièrement en code plutôt que dans un outil de BI." data-en="Analysing a catalogue of thousands of games, and rendering the analysis entirely in code rather than in a BI tool.">Analyser un catalogue de plusieurs milliers de jeux, et restituer l'analyse entièrement en code plutôt que dans un outil de BI.</p>
+      </div>
+      <span class="proj-tags" data-fr="Data + Web · Groupe" data-en="Data + Web · Team">Data + Web · Groupe</span>
+    </div>
+    <details class="case">
+      <summary data-fr="Ouvrir le dossier" data-en="Open the case file">Ouvrir le dossier</summary>
+      <dl class="case-body">
+        <div class="case-row"><dt data-fr="Problème" data-en="Problem">Problème</dt><dd data-fr="Identifier ce qui distingue réellement un jeu qui trouve son public d'un jeu qui disparaît : le genre, le prix, la note, la date de sortie ?" data-en="Identifying what really separates a game that finds its audience from one that disappears: genre, price, rating, release date?">Identifier ce qui distingue réellement un jeu qui trouve son public d'un jeu qui disparaît : le genre, le prix, la note, la date de sortie ?</dd></div>
+        <div class="case-row"><dt data-fr="Données" data-en="Data">Données</dt><dd data-fr="Métadonnées du catalogue Steam : genres, tarifs, évaluations, volumes de joueurs." data-en="Steam catalogue metadata: genres, pricing, ratings, player volumes.">Métadonnées du catalogue Steam : genres, tarifs, évaluations, volumes de joueurs.</dd></div>
+        <div class="case-row"><dt data-fr="Approche" data-en="Approach">Approche</dt><dd data-fr="Traitement en Python, puis un choix assumé : au lieu d'exporter des visuels depuis un outil, le rendu final a été codé en HTML, CSS et JavaScript. Plus long, mais contrôle total sur ce que le lecteur voit en premier." data-en="Processing in Python, then a deliberate choice: instead of exporting visuals from a tool, the final rendering was coded in HTML, CSS and JavaScript. Slower, but total control over what the reader sees first.">Traitement en Python, puis un choix assumé : au lieu d'exporter des visuels depuis un outil, le rendu final a été codé en HTML, CSS et JavaScript. Plus long, mais contrôle total sur ce que le lecteur voit en premier.</dd></div>
+        <div class="case-row"><dt data-fr="Résultat" data-en="Outcome">Résultat</dt><dd data-fr="Une restitution interactive, et la démonstration concrète que mes deux casquettes se complètent : l'analyse produit le chiffre, le développement décide de sa lisibilité." data-en="An interactive report, and concrete proof that my two hats complement each other: analysis produces the number, development decides its readability.">Une restitution interactive, et la démonstration concrète que mes deux casquettes se complètent : l'analyse produit le chiffre, le développement décide de sa lisibilité.</dd></div>
+      </dl>
+      <div class="stack"><span>Python</span><span>Pandas</span><span>JavaScript</span><span>HTML/CSS</span></div>
+      <div class="links"><span data-fr="Démo — à publier" data-en="Demo — to publish">Démo — à publier</span><span data-fr="Dépôt GitHub — à publier" data-en="GitHub repo — to publish">Dépôt GitHub — à publier</span></div>
+    </details>
+  </article>
+
+  <article class="proj">
+    <div class="proj-head">
+      <span class="proj-idx">P—03</span>
+      <div>
+        <h3>Mon Fuji</h3>
+        <p class="proj-sum" data-fr="Boutique en ligne en PHP orienté objet, sans framework : du diplôme 2024 à une refonte complète en architecture MVC, testée et sécurisée." data-en="Online store in object-oriented PHP, no framework: from the 2024 certification to a full rebuild in MVC architecture, tested and secured.">Boutique en ligne en PHP orienté objet, sans framework : du diplôme 2024 à une refonte complète en architecture MVC, testée et sécurisée.</p>
+      </div>
+      <span class="proj-tags" data-fr="Web · Diplôme 2024 · Refonte 2026" data-en="Web · 2024 diploma · 2026 rebuild">Web · Diplôme 2024 · Refonte 2026</span>
+    </div>
+    <details class="case">
+      <summary data-fr="Ouvrir le dossier" data-en="Open the case file">Ouvrir le dossier</summary>
+      <dl class="case-body">
+        <div class="case-row"><dt data-fr="Problème" data-en="Problem">Problème</dt><dd data-fr="Livrer un parcours d'achat qui fonctionne de bout en bout — de la première visite au paiement — en PHP orienté objet, sans le filet d'un framework." data-en="Delivering a purchase journey that works end to end — from first visit to payment — in object-oriented PHP, without the safety net of a framework.">Livrer un parcours d'achat qui fonctionne de bout en bout — de la première visite au paiement — en PHP orienté objet, sans le filet d'un framework.</dd></div>
+        <div class="case-row"><dt data-fr="Données" data-en="Data">Données</dt><dd data-fr="Base MySQL : catalogue produits, comptes utilisateurs, commandes, tableau de bord de ventes." data-en="MySQL database: product catalogue, user accounts, orders, sales dashboard.">Base MySQL : catalogue produits, comptes utilisateurs, commandes, tableau de bord de ventes.</dd></div>
+        <div class="case-row"><dt data-fr="Approche" data-en="Approach">Approche</dt><dd data-fr="Validé en 2024 pour le titre professionnel, puis entièrement repris : architecture MVC avec un routeur et des repositories, requêtes préparées partout, paiement Stripe vérifié côté serveur, 30 tests automatisés. Même base de données, même fonction, code repensé." data-en="Certified in 2024, then fully rebuilt: MVC architecture with a router and repositories, prepared statements throughout, Stripe payment verified server-side, 30 automated tests. Same database, same purpose, code rethought.">Validé en 2024 pour le titre professionnel, puis entièrement repris : architecture MVC avec un routeur et des repositories, requêtes préparées partout, paiement Stripe vérifié côté serveur, 30 tests automatisés. Même base de données, même fonction, code repensé.</dd></div>
+        <div class="case-row"><dt data-fr="Résultat" data-en="Outcome">Résultat</dt><dd data-fr="Titre professionnel validé en 2024. Le code source complet, avec son README, est sur GitHub." data-en="Certification validated in 2024. The full source code, with its README, is on GitHub.">Titre professionnel validé en 2024. Le code source complet, avec son README, est sur GitHub.</dd></div>
+      </dl>
+      <div class="stack"><span>PHP 8 · OOP</span><span>MySQL</span><span>Stripe</span><span>JavaScript</span><span>HTML/CSS</span></div>
+      <div class="links"><a href="https://github.com/nawfelr/monfuji" target="_blank" rel="noopener" data-fr="Dépôt GitHub" data-en="GitHub repo">Dépôt GitHub</a></div>
+    </details>
+  </article>
+
+  <article class="proj" style="opacity:.72">
+    <div class="proj-head">
+      <span class="proj-idx">P—04</span>
+      <div>
+        <h3 data-fr="Projet Power BI de bout en bout" data-en="End-to-end Power BI project">Projet Power BI de bout en bout</h3>
+        <p class="proj-sum" data-fr="Prévu après la certification PL-300 : ingestion, modélisation, mesures DAX et tableau de bord décisionnel. Ce sera aussi l'occasion de prendre Dataiku en main." data-en="Planned after the PL-300 certification: ingestion, modelling, DAX measures and a decision-support dashboard. Also a chance to get hands-on with Dataiku.">Prévu après la certification PL-300 : ingestion, modélisation, mesures DAX et tableau de bord décisionnel. Ce sera aussi l'occasion de prendre Dataiku en main.</p>
+      </div>
+      <span class="proj-tags" data-fr="À venir" data-en="Upcoming">À venir</span>
+    </div>
+  </article>
+</section>
+<section id="form">
+  <p class="eyebrow"><span data-fr="-- 04 · diplômes" data-en="-- 04 · degrees">-- 04 · diplômes</span></p>
+  <h2 data-fr="Deux titres obtenus, une certification en préparation" data-en="Two certifications earned, one in preparation">Deux titres obtenus, une certification en préparation</h2>
+  <div class="edu" style="margin-top:38px">
+    <article>
+      <p class="y">2024</p>
+      <h3 data-fr="Développeur web & web mobile" data-en="Web & mobile web developer">Développeur web & web mobile</h3>
+      <p data-fr="Titre professionnel · Niveau 5 (Bac+2) · RNCP" data-en="Professional title · Level 5 · RNCP">Titre professionnel · Niveau 5 (Bac+2) · RNCP</p>
+      <span class="badge" data-fr="Obtenu" data-en="Earned">Obtenu</span>
+    </article>
+    <article>
+      <p class="y">2026</p>
+      <h3 data-fr="Data analyst" data-en="Data analyst">Data analyst</h3>
+      <p data-fr="Titre professionnel · Le Wagon" data-en="Professional title · Le Wagon">Titre professionnel · Le Wagon</p>
+      <span class="badge" data-fr="Obtenu" data-en="Earned">Obtenu</span>
+    </article>
+    <article class="soon">
+      <p class="y">2026 →</p>
+      <h3>Microsoft PL-300</h3>
+      <p data-fr="Power BI Data Analyst Associate" data-en="Power BI Data Analyst Associate">Power BI Data Analyst Associate</p>
+      <span class="badge wait" data-fr="En préparation" data-en="In preparation">En préparation</span>
+    </article>
+  </div>
+</section>
+
+<section id="off">
+  <p class="eyebrow"><span data-fr="-- 05 · hors du code" data-en="-- 05 · off the clock">-- 05 · hors du code</span></p>
+  <div class="grid2">
+    <div>
+      <h2 data-fr="Ce que le reste m'apprend" data-en="What the rest teaches me">Ce que le reste m'apprend</h2>
+      <p class="lede" data-fr="On ne recrute pas un CV. Voici ce qui occupe mes journées quand je ne suis pas devant un terminal — et ce que chaque chose me rend meilleur à faire." data-en="You don't hire a résumé. Here's what fills my days when I'm not at a terminal — and what each thing makes me better at.">On ne recrute pas un CV. Voici ce qui occupe mes journées quand je ne suis pas devant un terminal — et ce que chaque chose me rend meilleur à faire.</p>
+    </div>
+    <div>
+      <div class="off" style="margin-top:0">
+        <article>
+          <h3 data-fr="Jeux vidéo" data-en="Gaming">Jeux vidéo</h3>
+          <p data-fr="Là où tout a commencé : comprendre un système, trouver ses limites, les contourner proprement." data-en="Where it all started: understanding a system, finding its limits, working around them cleanly.">Là où tout a commencé : comprendre un système, trouver ses limites, les contourner proprement.</p>
+          <p class="ret"><b>→</b> <span data-fr="itérer vite, rater vingt fois sans se décourager" data-en="iterate fast, fail twenty times without giving up">itérer vite, rater vingt fois sans se décourager</span></p>
+        </article>
+        <article>
+          <h3 data-fr="La marche" data-en="Walking">La marche</h3>
+          <p data-fr="Le seul moment de la journée sans écran, et paradoxalement celui où je résous le plus de problèmes." data-en="The only screen-free part of my day, and paradoxically where I solve the most problems.">Le seul moment de la journée sans écran, et paradoxalement celui où je résous le plus de problèmes.</p>
+          <p class="ret"><b>→</b> <span data-fr="savoir s'arrêter avant de s'acharner deux heures" data-en="knowing when to stop before grinding for two hours">savoir s'arrêter avant de s'acharner deux heures</span></p>
+        </article>
+        <article>
+          <h3 data-fr="Le football" data-en="Football">Le football</h3>
+          <p data-fr="Onze personnes, un objectif, et un résultat qui ne dépend jamais d'une seule d'entre elles." data-en="Eleven people, one goal, and a result that never rests on any single one of them.">Onze personnes, un objectif, et un résultat qui ne dépend jamais d'une seule d'entre elles.</p>
+          <p class="ret"><b>→</b> <span data-fr="tenir un rôle, encaisser une critique, rejouer la semaine d'après" data-en="holding a role, taking criticism, showing up again next week">tenir un rôle, encaisser une critique, rejouer la semaine d'après</span></p>
+        </article>
+        <article>
+          <h3 data-fr="Le cinéma" data-en="Cinema">Le cinéma</h3>
+          <p data-fr="Ce qui me fascine, c'est moins l'histoire que la façon dont elle est construite pour qu'on y croie." data-en="What fascinates me is less the story than how it's built so you believe it.">Ce qui me fascine, c'est moins l'histoire que la façon dont elle est construite pour qu'on y croie.</p>
+          <p class="ret"><b>→</b> <span data-fr="l'ordre des chiffres change ce qu'un lecteur retient" data-en="the order of the numbers changes what a reader remembers">l'ordre des chiffres change ce qu'un lecteur retient</span></p>
+        </article>
+        <article>
+          <h3 data-fr="Les voyages" data-en="Travel">Les voyages</h3>
+          <p data-fr="Aller quelque part où je ne connais ni les codes ni parfois la langue. On y désapprend des certitudes." data-en="Going somewhere where I know neither the customs nor sometimes the language. You unlearn certainties there.">Aller quelque part où je ne connais ni les codes ni parfois la langue. On y désapprend des certitudes.</p>
+          <p class="ret"><b>→</b> <span data-fr="le premier mois dans une entreprise, c'est le même exercice" data-en="the first month at a new company is the same exercise">le premier mois dans une entreprise, c'est le même exercice</span></p>
+        </article>
+        <article>
+          <h3 data-fr="La famille" data-en="Family">La famille</h3>
+          <p data-fr="Ce qui a tenu quand j'ai annoncé que j'arrêtais trois ans d'études pour repartir de zéro." data-en="What held when I announced I was quitting three years of study to start over.">Ce qui a tenu quand j'ai annoncé que j'arrêtais trois ans d'études pour repartir de zéro.</p>
+          <p class="ret"><b>→</b> <span data-fr="défendre une décision avec des arguments, pas de l'enthousiasme" data-en="defending a decision with arguments, not enthusiasm">défendre une décision avec des arguments, pas de l'enthousiasme</span></p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="eyebrow"><span data-fr="-- 06 · contact" data-en="-- 06 · contact">-- 06 · contact</span></p>
+  <div class="contact">
+    <div>
+      <h2 data-fr="Je cherche une équipe qui accepte de former quelqu'un qui apprend vite." data-en="I'm looking for a team willing to train someone who learns fast.">Je cherche une équipe qui accepte de former quelqu'un qui apprend vite.</h2>
+      <p class="lede" style="margin-top:18px" data-fr="Je pose beaucoup de questions les premières semaines, et je deviens très autonome ensuite. Je documente ce que j'écris, parce que j'ai déjà repris du code sans commentaire et je ne le souhaite à personne." data-en="I ask a lot of questions in the first weeks, then become very autonomous. I document what I write, because I've inherited uncommented code before and wouldn't wish it on anyone.">Je pose beaucoup de questions les premières semaines, et je deviens très autonome ensuite. Je documente ce que j'écris, parce que j'ai déjà repris du code sans commentaire et je ne le souhaite à personne.</p>
+      <div class="avail">
+        <span class="hl">CDI</span><span class="hl">CDD</span>
+        <span class="hl" data-fr="Alternance" data-en="Apprenticeship">Alternance</span>
+        <span class="hl" data-fr="Stage" data-en="Internship">Stage</span>
+        <span data-fr="Île-de-France" data-en="Île-de-France">Île-de-France</span>
+        <span data-fr="Mobilité nationale" data-en="Nationwide mobility">Mobilité nationale</span>
+        <span data-fr="Télétravail" data-en="Remote">Télétravail</span>
+      </div>
+    </div>
+    <div class="cl">
+      <a href="https://www.linkedin.com/in/nawfel-rahmani" target="_blank" rel="noopener">
+        <b>LinkedIn</b><em>nawfel-rahmani ↗</em>
+      </a>
+      <span><b>Email</b><em data-fr="à renseigner" data-en="to be added">à renseigner</em></span>
+      <span><b>GitHub</b><em data-fr="à renseigner" data-en="to be added">à renseigner</em></span>
+      <span><b>CV · PDF</b><em data-fr="bientôt" data-en="soon">bientôt</em></span>
+      <a href="javascript:window.print()"><b data-fr="Imprimer ce site" data-en="Print this site">Imprimer ce site</b><em data-fr="version CV, 2 pages" data-en="CV version, 2 pages">version CV, 2 pages</em></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-fr="Nawfel Rahmani — carnet de bord · 2026" data-en="Nawfel Rahmani — field notebook · 2026">Nawfel Rahmani — carnet de bord · 2026</span>
+  <span data-fr="Écrit à la main. HTML, CSS, JavaScript. Aucune dépendance." data-en="Hand-written. HTML, CSS, JavaScript. No dependencies.">Écrit à la main. HTML, CSS, JavaScript. Aucune dépendance.</span>
+</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var LANG='fr';
+  var CAPS=[
+    {fr:'Fig. 1 — Monitoring',en:'Fig. 1 — Monitoring'},
+    {fr:'Fig. 2 — Application web',en:'Fig. 2 — Web application'},
+    {fr:'Fig. 3 — Analyse',en:'Fig. 3 — Analysis'},
+    {fr:'Fig. 4 — Pipeline orchestré',en:'Fig. 4 — Orchestrated pipeline'},
+    {fr:'Fig. 5 — Pipeline sécurisé',en:'Fig. 5 — Secured pipeline'}
+  ];
+  var cur=0;
+
+  window.setLang=function(l){
+    LANG=l;
+    document.documentElement.lang=l;
+    document.getElementById('bfr').classList.toggle('on',l==='fr');
+    document.getElementById('ben').classList.toggle('on',l==='en');
+    var els=document.querySelectorAll('[data-fr]');
+    for(var i=0;i<els.length;i++){
+      var v=(l==='fr')?els[i].getAttribute('data-fr'):els[i].getAttribute('data-en');
+      if(v) els[i].innerHTML=v;
+    }
+    paintCap();
+  };
+
+  function paintCap(){
+    var t=document.getElementById('capTxt'), n=document.getElementById('capIdx');
+    if(!t) return;
+    t.textContent=CAPS[cur][LANG];
+    n.textContent=('0'+(cur+1)).slice(-2)+' / 0'+CAPS.length;
+  }
+
+  function setState(i){
+    if(i===cur) return;
+    cur=i;
+    var sts=document.querySelectorAll('.st');
+    for(var k=0;k<sts.length;k++){
+      sts[k].classList.toggle('on', String(k)===String(i));
+    }
+    paintCap();
+  }
+
+  function initScrolly(){
+    var steps=document.querySelectorAll('.step');
+    if(!steps.length) return;
+    if(!('IntersectionObserver' in window)){
+      for(var i=0;i<steps.length;i++) steps[i].classList.add('on');
+      return;
+    }
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var idx=e.target.getAttribute('data-i');
+          for(var j=0;j<steps.length;j++) steps[j].classList.remove('on');
+          e.target.classList.add('on');
+          setState(idx);
+        }
+      });
+    },{rootMargin:'-46% 0px -44% 0px',threshold:0});
+    for(var s=0;s<steps.length;s++) io.observe(steps[s]);
+  }
+
+  function initNav(){
+    var links=document.querySelectorAll('nav a');
+    var secs=[];
+    for(var i=0;i<links.length;i++){
+      var id=links[i].getAttribute('href').slice(1);
+      var el=document.getElementById(id);
+      if(el) secs.push({a:links[i],el:el});
+    }
+    if(!('IntersectionObserver' in window)) return;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          for(var k=0;k<secs.length;k++) secs[k].a.classList.toggle('on',secs[k].el===e.target);
+        }
+      });
+    },{rootMargin:'-20% 0px -70% 0px',threshold:0});
+    for(var s=0;s<secs.length;s++) io.observe(secs[s].el);
+  }
+
+  function initCount(){
+    var els=document.querySelectorAll('[data-count]');
+    var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    for(var i=0;i<els.length;i++){
+      (function(el){
+        var target=parseInt(el.getAttribute('data-count'),10);
+        if(reduce){el.textContent=target+'+';return;}
+        var n=0;
+        (function tick(){
+          n+=Math.max(1,target/20);
+          if(n>=target){el.textContent=target+'+';return;}
+          el.textContent=Math.floor(n);
+          requestAnimationFrame(tick);
+        })();
+      })(els[i]);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    initScrolly();
+    initNav();
+    paintCap();
+    setTimeout(initCount,420);
+  });
+})();
+</script>
+</body>
+</html>
